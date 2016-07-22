@@ -4,9 +4,9 @@ rohy_prumer = 5;
 tloustka = 2;
 tloustka_steny = 3;
 
-include <../../configuration.scad>
-include <../inc/honeycomb.scad>
-use <../inc/text_RebeliX.scad>
+include <../../../configuration.scad>
+include <../../inc/honeycomb.scad>
+use <../../inc/text_RebeliX.scad>
 
 module obvod()
 {

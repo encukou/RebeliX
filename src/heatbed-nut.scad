@@ -8,7 +8,7 @@
 include <../configuration.scad>
 
 // Prumer celeho drzadla
-diameter = 16;
+diameter = 20;
 // Prumer zoubku na kole
 tooth_diameter = 2.4;
 

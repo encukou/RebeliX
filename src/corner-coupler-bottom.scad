@@ -7,51 +7,27 @@
 // Inspired by Rebel II
 
 include <../configuration.scad>
+use <corner-coupler.scad>
+//import("/Users/marek/ownCloud/ČVUT/Tiskni 3D Doma/RebeliX/STLs/corner-coupler-bottom_left.stl");
 
-// Prumer pristrojove gumove nozicky
-rubber_feet_d = 20;
 
-module drazka()
-{
-  distance = M6_dia >= profile_nut_width ? M6_dia : profile_nut_width;
-  
-  translate([-30/2+4,0,0]) cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
-  translate([-distance/2-4,0,0]) cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
-  translate([-distance/4 - 7.5,0,0]) cube([7 - distance/2,8,coupler_thickness+1.5],center=true);
-	
-  translate([30/2-4,0,0])cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
-  translate([distance/2+4,0,0])cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
-  translate([distance/4 + 7.5,0,0]) cube([7 - distance/2,8,coupler_thickness+1.5],center=true);
-}
-
-module corner_coupler_bottom()
-{
-  difference()
-  {
-	union()
-	{
-	  cube([60,30,coupler_thickness]);
-	  translate([15,30/2,(coupler_thickness+1.5)/2]) rotate([0,0,90]) drazka();
-	  translate([45,30/2,(coupler_thickness+1.5)/2]) drazka();
-	  translate([15,15-9-rubber_feet_d/2,0]) cylinder(r=rubber_feet_d/2,h=coupler_thickness,$fn=64);
-	  translate([15,15-9,coupler_thickness/2]) cube([rubber_feet_d,rubber_feet_d,coupler_thickness],center=true);
-	  translate([15,15-9-rubber_feet_d/2,0]) cylinder(r=4,h=coupler_thickness+1.5,$fn=32);
-	  translate([15-4,15-9-rubber_feet_d/2,0]) cube([8,rubber_feet_d/2,coupler_thickness+1.5]);
-	}
-		
-	// Otvory pro srouby
-	translate([15,30/2,0])cylinder(h=20,r=M6_dia/2,$fn=32,center=true);
-	translate([45,30/2,0])cylinder(h=20,r=M6_dia/2,$fn=32,center=true);
-	translate([15,15-9-rubber_feet_d/2,0]) cylinder(r=1.5,h=20,$fn=16,center=true);
-		
-	// Zalomene hrany
-	translate([-1,-0.1,-5]) rotate([0,-45,0]) cube([5,40,5]);
-	translate([61,-0.1,-5]) rotate([0,-45,0]) cube([5,40,5]);
-	translate([15+rubber_feet_d/2,-1,-5]) rotate([45,0,0]) cube([70,5,5]);
-	translate([15-rubber_feet_d/2,-1,-5]) rotate([45,0,180]) cube([70,5,5]);
-	translate([-0.1,31,-5]) rotate([45,0,0]) cube([70,5,5]);
-  }
+module corner_coupler_bottom(size=[60,30,coupler_thickness],mount_hole_width=alu_hole_width,mount_height=2,rubber_feet_d = 20) {
+    corner_coupler(size,mount_hole_width,mount_height);
+    
+    translate([size[0]/2+size[1]/2,0,0])
+    difference(){
+        union(){
+            hull(){
+                cylinder(r=rubber_feet_d/2,h=coupler_thickness,$fn=40);    
+                translate([0,-rubber_feet_d/4,0])cylinder(r=rubber_feet_d/2,h=coupler_thickness,$fn=40);
+            }
+            translate([-mount_hole_width/2,-rubber_feet_d/2,size[2]])rounded_cube([mount_hole_width,rubber_feet_d/4*3,mount_height],corner_radius=3,$fn=30);
+        }
+        translate([0,-rubber_feet_d/4,-1])cylinder(r=1.5,h=coupler_thickness+mount_height+2,$fn=20);
+    }
 }
 
 corner_coupler_bottom();
-translate([0,65,0]) mirror([0,1,0]) corner_coupler_bottom();
+translate([0,62,0])
+mirror([0,1,0])
+corner_coupler_bottom();

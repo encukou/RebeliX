@@ -5,7 +5,7 @@
 // Martin Neruda <neruda@reprap4u.cz>
 // http://www.reprap4u.cz
 
-include <../../configuration.scad>
+include <../../../configuration.scad>
 
 box_sirka = 72;
 box_vyska = 52;

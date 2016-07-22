@@ -48,7 +48,7 @@ z_base_offset = 11;
 // Tloustka rohovych spojek
 // 5 mm => sroub M6x14 s podlozkou
 // 3 mm => sroub M6x12 s podlozkou
-coupler_thickness = 5;
+coupler_thickness = 3;
 
 // Prumer 8mm tyce
 rod_8mm_d = 8.2;
@@ -56,13 +56,16 @@ rod_8mm_d = 8.2;
 // Posun drzacku mezi x-motor a x-end
 x_holder_position = 6.5;
 
+// ALU profile hole width
+alu_hole_width = 8;
+
 /*======================== Motory ============================*/
 
 // Delka motoru (ovlivni dily a delky tyci pro osy Z a Y)
 //SX17-1003LQFE (doporuceno hlavne na osu Z)
-//motor_length = 29.5;
+motor_length = 29.5;
 //SX17-1003 (doporuceno hlavne na osu Z), SX17-0503LQEF
-motor_length = 34;
+//motor_length = 34;
 //SX17-1005
 //motor_length = 40;
 //SX17-0905 - zde je jiz problem s velkou vyskou motoru na ose Z - musi se upravit endstop-holder
